@@ -18,7 +18,7 @@ class Game(Base):
     price = Column(Integer())
 
     #why is game singular and lowercase??
-    reviews = relationship('Review', backref=backref('game'))
+    reviews = relationship('Review', backref=backref('game'), cascade="all, delete-orphan")
 
     def __repr__(self):
         return f'Game(id={self.id}, ' + \
@@ -29,7 +29,7 @@ class Review(Base):
     __tablename__ = "reviews"
 
     id = Column(Integer(), primary_key=True)
-    scocre = Column(Integer())
+    score = Column(Integer())
     comment = Column(String())
     game_id = Column(Integer(), ForeignKey('games.id'))
 
